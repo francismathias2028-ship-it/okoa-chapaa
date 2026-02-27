@@ -1,0 +1,7 @@
+export async function pay(phone,amount){
+  return fetch("/api/mpesa",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({phone,amount})
+  });
+}

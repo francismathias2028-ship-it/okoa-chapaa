@@ -1,0 +1,27 @@
+<h2>Dashboard</h2>
+<button onclick="checkEligibility()">Check Eligibility</button>
+<button onclick="pay()">Pay Fee</button>
+
+<p id="result"></p>
+
+<script>
+async function checkEligibility(){
+  const res = await fetch("/api/eligibility");
+  const data = await res.json();
+  result.innerText = data.eligible
+    ? "Eligible for " + data.amount
+    : "Not eligible";
+}
+
+async function pay(){
+  await fetch("/api/mpesa",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      phone:"254708374149",
+      amount:10
+    })
+  });
+  alert("STK Push Sent");
+}
+</script>
